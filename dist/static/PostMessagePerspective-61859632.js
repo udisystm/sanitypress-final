@@ -1,1 +1,0 @@
-import{r as s}from"./sanity-b2fc26b5.js";const p=r=>{const{comlink:e,perspective:t}=r;return s.useEffect(()=>e.on("visual-editing/fetch-perspective",()=>({perspective:t})),[e,t]),s.useEffect(()=>{e.post({type:"presentation/perspective",data:{perspective:t}})},[e,t]),null};var c=s.memo(p);export{c as default};
