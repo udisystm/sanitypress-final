@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+.env.local
 
 # testing
 /coverage
@@ -37,3 +38,4 @@ next-env.d.ts
 public/google*.html
 sanitypress.zip
 
+.env.local
