@@ -1,0 +1,28 @@
+.header {
+	grid-template:
+		'logo toggle' auto
+		'nav nav' auto
+		'ctas ctas' auto / 1fr auto;
+
+	@screen md {
+		grid-template: 'logo nav ctas' auto / auto 1fr auto;
+	}
+}
+
+/* Ensure sticky behavior is applied only to the wrapper */
+.sticky {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Ensure the header container remains fixed and doesn’t move on toggle */
+.header {
+  transition: transform 0.3s ease-in-out; /* Smooth transition if needed */
+}
+
+/* Apply the shadow when header is open (with or without toggle) */
+.header-open {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
