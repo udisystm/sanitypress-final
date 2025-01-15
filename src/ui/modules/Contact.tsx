@@ -53,14 +53,14 @@ export default function BookingForm({
 
 		try {
 			const response = await emailjs.send(
-				'service_aindb2m', // Replace with your service ID
-				'template_2gxnn6a', // Replace with your template ID
+				'service_0v46cwg', // Replace with your service ID
+				'template_g4sw0k6', // Replace with your template ID
 				{
 					from_name: formData.name,
 					from_email: formData.email,
 					message: JSON.stringify(formData, null, 2),
 				},
-				'xIpbMcALDSxhrBN7L' // Replace with your public key
+				'sIGuM1KgWGl6wTt2PwEz0' // Replace with your public key
 			);
 			console.log('Email sent successfully:', response);
 			alert('Form submitted successfully!');
