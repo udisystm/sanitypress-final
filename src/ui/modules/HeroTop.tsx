@@ -25,7 +25,7 @@ export default function HeroTop({
 					<h1 className="text-[52px] leading-[52px] font-[900]  font-sans tracking-tight  md:text-6xl lg:text-[72px]">
 						{title}
 					</h1>
-					<div className="text-muted-foreground max-w-2xl text-lg font-script lg:text-[30px] lg:leading-10">
+					<div className="text-muted-foreground max-w-2xl text-lg font-script lg:text-[26px] lg:leading-10">
 						<PortableText value={content} />
 					</div>
 					{ctas && (

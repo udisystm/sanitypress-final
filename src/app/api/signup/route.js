@@ -6,9 +6,9 @@ export async function POST(req) {
 	console.log('Received data:', body)
 
 	// Replace with your EmailJS service and template IDs
-	const serviceID = 'service_aindb2m'
-	const templateID = 'template_2gxnn6a'
-	const publicKey = 'xIpbMcALDSxhrBN7L'
+	const serviceID = 'service_0v46cwg'
+	const templateID = 'template_g4sw0k6'
+	const publicKey = 'sIGuM1KgWGl6wTt2PwEz0'
 
 	const templateParams = {
 		from_name: body.name,

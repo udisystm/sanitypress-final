@@ -13,7 +13,7 @@ export default function Content({
 	return (
 		<div
 			className={cn(
-				'richtext  mx-auto w-full space-y-[1em]  [&>:first-child]:!mt-0 text-[20px] font-[400] lg:text-[26px] font-sans ',
+				'richtext  mx-auto w-full space-y-[1em]  [&>:first-child]:!mt-0 text-[20px] font-[400]  font-sans ',
 				className,
 			)}
 		>
