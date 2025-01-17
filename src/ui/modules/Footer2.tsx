@@ -1,103 +1,76 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react'
+import Img from '../Img'
+import { sanityClient } from '@/sanity/lib/sanityClient'
 
 interface NavItem {
-	_key: string;
-	title: string;
-	href?: string;
-	children?: NavItem[];
+	_key: string
+	title: string
+	href?: string
+	children?: NavItem[]
+	logo?: Sanity.Image
 }
 
 interface CompanyItem {
-	_key: string;
-	title: string;
-	href: string;
-	phoneNumber?: string;
-	email?: string;
+	_key: string
+	title: string
+	href: string
+	phoneNumber?: string
+	email?: string
+	logo?: Sanity.Image
+
 }
 
 interface Footer2Props {
-	newsletterHeading?: string;
-	newsletterDescription?: string;
-	subscriptionButtonText?: string;
-	services?: NavItem[];
-	company?: CompanyItem[];
+	logo?: Sanity.Image // Added logoSrc prop
+	logoAlt?: string // Added logoAlt prop
+	services?: NavItem[]
+	company?: CompanyItem[]
 }
+type FooterData = {
+	logo: Sanity.Image
+	
+};
 
 export default function Footer2({
-	newsletterHeading,
-	newsletterDescription,
-	subscriptionButtonText,
+	logo,
 	services,
 	company,
 }: Footer2Props) {
-	const [expandedItem, setExpandedItem] = useState<string | null>(null);
-	const [email, setEmail] = useState('');
-	const [firstName, setFirstName] = useState('');
-	const [phoneNumber, setPhoneNumber] = useState('');
+		const [footerData, setFooterData] = useState<Footer2Props | null>(null);
+	
+	const [expandedItem, setExpandedItem] = useState<string | null>(null)
+useEffect(() => {
+		const fetchHeaderData = async () => {
+			const query = '*[_type == "footer"][0]';
+			const data = await sanityClient.fetch(query);
+			setFooterData(data);
+		};
 
+		fetchHeaderData();
+	}, []);
 	// Toggle function for nested services
 	const toggleItem = (key: string) => {
-		setExpandedItem((current) => (current === key ? null : key));
-	};
-
-	// Handle form submission
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		console.log({ firstName, email, phoneNumber });
-	};
+		setExpandedItem((current) => (current === key ? null : key))
+	}
 
 	return (
 		<footer className="border-t py-12 md:py-16">
-			<div className="container mx-auto px-4 max-w-6xl">
-				<div className="grid max-md:grid-cols-1  grid-cols-2 md:grid-cols-[1fr,1] gap-12">
-					{/* Newsletter Subscription */}
-					<div >
-						<h2 className="text-xl font-sans font-semibold mb-6">{newsletterHeading}</h2>
-						<p className="mb-6 font-sans">{newsletterDescription}</p>
-						<form onSubmit={handleSubmit} className="space-y-4 md:w-[80%]">
-							<input
-								type="text"
-								placeholder="Your first name"
-								value={firstName}
-								onChange={(e) => setFirstName(e.target.value)}
-								className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-								required
-							/>
-							<input
-								type="email"
-								placeholder="Your email address"
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-								className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-								required
-							/>
-							<input
-								type="tel"
-								placeholder="Your phone number"
-								value={phoneNumber}
-								onChange={(e) => setPhoneNumber(e.target.value)}
-								className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-								required
-								pattern="^\+?\d{10,15}$"
-							/>
-							<button
-								type="submit"
-								className="w-full text-center font-Helvetica flex items-center font-sans gap-2 rounded-sm bg-[#febd01] text-[18px] px-6 max-md:px-4 py-2 !text-black font-Helvetica font-[500] hover:bg-[#ffcd35]"
-							>
-								{subscriptionButtonText}
-							</button>
-						</form>
+			<div className="container mx-auto max-w-6xl px-4">
+				<div className="grid grid-cols-2 gap-12 max-md:grid-cols-1 md:grid-cols-[1fr,1]">
+					{/* Logo Section */}
+					<div>
+						<Img image={footerData?.logo} alt="logo" className="h-auto w-[300px]" />
 					</div>
 
 					{/* Navigation */}
-					<div className="grid md:grid-cols-2 gap-8">
+					<div className="grid gap-8 md:grid-cols-2">
 						{/* Services */}
-
-						{/* this is services */}
 						<div>
-							<h3 className="font-medium text-gray-900 mb-4 font-sans">Services</h3>
+							<h3 className="mb-4 font-sans font-medium text-gray-900">
+								Services
+							</h3>
 							<ul className="space-y-2">
 								{services?.map((item) => (
 									<li key={item._key}>
@@ -106,15 +79,17 @@ export default function Footer2({
 												<>
 													<button
 														onClick={() => toggleItem(item._key)}
-														className="flex items-center justify-between w-full text-left hover:text-blue-600 group"
+														className="group flex w-full items-center justify-between text-left hover:text-blue-600"
 														aria-expanded={expandedItem === item._key}
 														aria-controls={`submenu-${item._key}`}
 													>
-														<span className="text-gray-900 font-sans group-hover:text-blue-600">
+														<span className="font-sans text-gray-900 group-hover:text-blue-600">
 															{item.title}
 														</span>
 														<svg
-															className={`w-4 h-4 transition-transform ${expandedItem === item._key ? 'rotate-180' : ''}`}
+															className={`h-4 w-4 transition-transform ${
+																expandedItem === item._key ? 'rotate-180' : ''
+															}`}
 															fill="none"
 															stroke="currentColor"
 															viewBox="0 0 24 24"
@@ -128,10 +103,16 @@ export default function Footer2({
 														</svg>
 													</button>
 													{expandedItem === item._key && (
-														<ul id={`submenu-${item._key}`} className="ml-4 mt-2 space-y-2">
+														<ul
+															id={`submenu-${item._key}`}
+															className="ml-4 mt-2 space-y-2"
+														>
 															{item.children.map((child) => (
 																<li key={child._key}>
-																	<a href={child.href} className="text-gray-600 font-sans hover:text-blue-600">
+																	<a
+																		href={child.href}
+																		className="font-sans text-gray-600 hover:text-blue-600"
+																	>
 																		{child.title}
 																	</a>
 																</li>
@@ -140,7 +121,10 @@ export default function Footer2({
 													)}
 												</>
 											) : (
-												<a href={item.href} className="text-gray-900 font-sans hover:text-blue-600">
+												<a
+													href={item.href}
+													className="font-sans text-gray-900 hover:text-blue-600"
+												>
 													{item.title}
 												</a>
 											)}
@@ -152,23 +136,34 @@ export default function Footer2({
 
 						{/* Company */}
 						<div>
-							<h3 className="font-medium text-gray-900 mb-4 font-sans">Company</h3>
+							<h3 className="mb-4 font-sans font-medium text-gray-900">
+								Company
+							</h3>
 							<ul className="space-y-2">
 								{company?.map((item) => (
 									<li key={item._key}>
-										<a href={item.href} className="text-gray-900 font-sans hover:text-blue-600">
+										<a
+											href={item.href}
+											className="font-sans text-gray-900 hover:text-blue-600"
+										>
 											{item.title}
 										</a>
 										{item.phoneNumber && (
-											<div className="text-gray-600 mt-2">
-												<a href={`tel:${item.phoneNumber}`} className="text-gray-600 font-sans hover:text-blue-600">
+											<div className="mt-2 text-gray-600">
+												<a
+													href={`tel:${item.phoneNumber}`}
+													className="font-sans text-gray-600 hover:text-blue-600"
+												>
 													Phone: {item.phoneNumber}
 												</a>
 											</div>
 										)}
 										{item.email && (
-											<div className="text-gray-600 mt-2">
-												<a href={`mailto:${item.email}`} className="text-gray-600 font-sans hover:text-blue-600">
+											<div className="mt-2 text-gray-600">
+												<a
+													href={`mailto:${item.email}`}
+													className="font-sans text-gray-600 hover:text-blue-600"
+												>
 													Email: {item.email}
 												</a>
 											</div>
@@ -181,5 +176,5 @@ export default function Footer2({
 				</div>
 			</div>
 		</footer>
-	);
+	)
 }

@@ -5,26 +5,13 @@ export default defineType({
 	title: 'Footer',
 	type: 'document',
 	fields: [
-		// Newsletter Section
+		// Logo Section
 		defineField({
-			name: 'newsletterHeading',
-			title: 'Newsletter Heading',
-			type: 'string',
-			validation: (Rule) => Rule.required().max(100),
+			name: 'logo',
+			title: 'Logo',
+			type: 'image',
+			options: { hotspot: true },
 		}),
-		defineField({
-			name: 'newsletterDescription',
-			title: 'Newsletter Description',
-			type: 'text',
-			validation: (Rule) => Rule.required(),
-		}),
-		defineField({
-			name: 'subscriptionButtonText',
-			title: 'Subscription Button Text',
-			type: 'string',
-			validation: (Rule) => Rule.required().max(50),
-		}),
-
 		// Services Section
 		defineField({
 			name: 'services',
@@ -45,13 +32,10 @@ export default defineType({
 						defineField({
 							name: 'href',
 							title: 'Service Link',
-							type: 'string', // Allows relative paths and URLs
+							type: 'string',
 							validation: (Rule) =>
 								Rule.required().custom((url) => {
-									if (!url) {
-										return 'URL is required.';
-									}
-
+									if (!url) return 'URL is required.';
 									const isValid =
 										url.startsWith('http://') ||
 										url.startsWith('https://') ||
@@ -78,13 +62,10 @@ export default defineType({
 										defineField({
 											name: 'href',
 											title: 'Sub Service Link',
-											type: 'string', // Allows relative paths and URLs
+											type: 'string',
 											validation: (Rule) =>
 												Rule.required().custom((url) => {
-													if (!url) {
-														return 'URL is required.';
-													}
-
+													if (!url) return 'URL is required.';
 													const isValid =
 														url.startsWith('http://') ||
 														url.startsWith('https://') ||
@@ -100,7 +81,6 @@ export default defineType({
 				}),
 			],
 		}),
-
 		// Company Section
 		defineField({
 			name: 'company',
@@ -124,17 +104,13 @@ export default defineType({
 							type: 'string',
 							validation: (Rule) =>
 								Rule.custom((url) => {
-									if (!url) {
-										return true; // Allow empty values without errors
-									}
-
+									if (!url) return true; // Allow empty values without errors
 									const isValid =
 										url.startsWith('http://') ||
 										url.startsWith('https://') ||
 										url.startsWith('/');
 									return isValid || 'Must be a valid URL or relative path.';
 								}),
-
 						}),
 						defineField({
 							name: 'phoneNumber',

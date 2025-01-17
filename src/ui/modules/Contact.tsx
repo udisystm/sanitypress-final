@@ -60,7 +60,7 @@ export default function BookingForm({
 					from_email: formData.email,
 					message: JSON.stringify(formData, null, 2),
 				},
-				'sIGuM1KgWGl6wTt2PwEz0' // Replace with your public key
+				'l-fYYsKag9ZuFZYBE' // Replace with your public key
 			);
 			console.log('Email sent successfully:', response);
 			alert('Form submitted successfully!');

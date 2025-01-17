@@ -54,7 +54,7 @@ export default function HeroTop({
 					{graphImage && (
 						<Img
 							image={graphImage}
-							className="h-[429px]"
+							className=""
 						/>
 					)}
 				</div>

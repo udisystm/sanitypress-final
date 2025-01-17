@@ -8,7 +8,7 @@ export async function POST(req) {
 	// Replace with your EmailJS service and template IDs
 	const serviceID = 'service_0v46cwg'
 	const templateID = 'template_g4sw0k6'
-	const publicKey = 'sIGuM1KgWGl6wTt2PwEz0'
+	const publicKey = 'l-fYYsKag9ZuFZYBE'
 
 	const templateParams = {
 		from_name: body.name,
