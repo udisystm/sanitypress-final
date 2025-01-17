@@ -40,11 +40,8 @@ export default async function RootLayout({
 				</main>
 				{/* Pass the fetched footer data */}
 				<Footer2
-					newsletterHeading={footerData.newsletterHeading}
-					newsletterDescription={footerData.newsletterDescription}
 					services={footerData.services}
 					company={footerData.company}
-					subscriptionButtonText={footerData.subscriptionButtonText}
 				/>
 				<VisualEditingControls />
 				<Analytics />
