@@ -2,7 +2,7 @@
 
 import { defineConfig } from 'sanity'
 import { structure } from './src/sanity/structure'
-import { presentation } from './src/sanity/presentation'
+// import { presentation } from './src/sanity/presentation'
 import {
 	dashboardTool,
 	projectInfoWidget,
@@ -22,7 +22,7 @@ export default defineConfig({
 
 	plugins: [
 		structure,
-		presentation,
+		// presentation,
 		dashboardTool({
 			name: 'deployment',
 			title: 'Deployment',
