@@ -47,7 +47,7 @@ const Header2 = () => {
 						image={headerData.logo}
 						alt="Logo"
 
-						className="w-[250px] max-md:w-[170px]"
+						className="w-[250px] max-md:w-[220px]"
 					/>
 				</Link>
 
