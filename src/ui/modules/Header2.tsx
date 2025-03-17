@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { sanityClient } from '@/sanity/lib/sanityClient';
 import { urlFor } from '@/sanity/lib/image';
 import Img from '../Img';
+import { IoCloseOutline } from "react-icons/io5";
+
 
 type NavigationItem = {
 	_key: string;
@@ -114,44 +116,59 @@ const Header2 = () => {
 			</div>
 
 			{/* Mobile menu */}
-			{menuOpen && (
-				<div className="md:hidden bg-white border-t">
-					<nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
-						{headerData.navigationItems.map((item) => (
-							<div key={item._key} className="relative">
-								<Link
-									href={item.href}
-									className="text-gray-600 hover:text-gray-900 transition-colors text-[16px] font-sans"
-									onClick={() => setMenuOpen(false)}
-								>
-									{item.label}
-								</Link>
-								{item.submenus && (
-									<div className="mt-2 pl-4">
-										{item.submenus.map((submenu, idx) => (
-											<Link
-												key={idx}
-												href={submenu.href}
-												className="block text-gray-600 hover:text-gray-900 transition-colors text-[16px] font-sans"
-												onClick={() => setMenuOpen(false)}
-											>
-												{submenu.label}
-											</Link>
-										))}
-									</div>
-								)}
-							</div>
-						))}
-						<Link
-							href={headerData.ctaButton.href}
-							className="font-sans w-fit  inline-flex items-center rounded-md bg-[#febd01] text-[16px] px-6 max-md:px-3 py-1 !text-black font-Helvetica font-bold hover:bg-[#ffcd35]"
-							onClick={() => setMenuOpen(false)}
-						>
-							{headerData.ctaButton.label}
-						</Link>
-					</nav>
-				</div>
-			)}
+            {menuOpen && (
+	            <div className="fixed inset-x-0 top-0 w-full h-2/4 bg-white shadow-lg md:hidden z-50">
+		            <div className="container mx-auto h-20 border-b px-2 py-4 flex items-center justify-between">
+		            	{/* Logo */}
+		            	<Link href="/" className="flex items-center">
+		            			<Img
+		            				image={headerData.logo}
+		            				alt="Logo"
+		            				className="w-[250px] max-md:w-[220px]"
+		            			/>
+		            		</Link>
+            
+		            	{/* Close Button */}
+						<IoCloseOutline onClick={() => setMenuOpen(false)} className='h-7 w-7 cursor-pointer' />
+		            </div>
+
+		            <nav className="container mx-auto px-4 py-6 flex flex-col gap-4">
+		            	{headerData.navigationItems.map((item) => (
+		            		<div key={item._key} className="relative">
+		            			<Link
+		            				href={item.href}
+		            				className="text-gray-600 hover:text-gray-900 transition-colors text-[16px] font-sans"
+		            				onClick={() => setMenuOpen(false)}
+		            			>
+		            				{item.label}
+		            			</Link>
+		            			{item.submenus && (
+		            				<div className="mt-2 pl-4">
+		            					{item.submenus.map((submenu, idx) => (
+		            						<Link
+		            							key={idx}
+		            							href={submenu.href}
+		            							className="block text-gray-600 hover:text-gray-900 transition-colors text-[16px] font-sans"
+		            							onClick={() => setMenuOpen(false)}
+		            						>
+		            							{submenu.label}
+		            						</Link>
+		            					))}
+		            				</div>
+		            			)}
+		            		</div>
+		            	))}
+		            	<Link
+		            		href={headerData.ctaButton.href}
+		            		className="font-sans w-fit inline-flex items-center rounded-md bg-[#febd01] text-[16px] px-6 max-md:px-3 py-1 !text-black font-Helvetica font-bold hover:bg-[#ffcd35]"
+		            		onClick={() => setMenuOpen(false)}
+		            	>
+		            		{headerData.ctaButton.label}
+		            	</Link>
+		            </nav>
+	            </div>
+            )}
+
 		</header>
 	);
 };

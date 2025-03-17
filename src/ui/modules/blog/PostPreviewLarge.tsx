@@ -4,11 +4,18 @@ import Img from '@/ui/Img'
 import Date from '@/ui/Date'
 import Categories from './Categories'
 import Authors from './Authors'
+import SchemaMarkup from '@/ui/SchemaMarkup'
 
 export default function PostPreviewLarge({ post }: { post: Sanity.BlogPost }) {
 	if (!post) return null
 
 	return (
+
+		<>
+
+        {/* SchemaMarkup for SEO */}
+        <SchemaMarkup post={post} />
+
 		<Link
 			className="group grid items-center gap-x-8 gap-y-4 md:grid-cols-2"
 			href={processUrl(post, { base: false })}
@@ -54,5 +61,6 @@ export default function PostPreviewLarge({ post }: { post: Sanity.BlogPost }) {
 				)}
 			</div>
 		</Link>
+		</>
 	)
 }

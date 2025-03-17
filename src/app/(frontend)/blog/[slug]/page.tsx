@@ -4,6 +4,7 @@ import { modulesQuery } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
 import Modules from '@/ui/modules'
 import processMetadata from '@/lib/processMetadata'
+import SchemaMarkup from '@/ui/SchemaMarkup'
 
 export default async function Page({ params }: Props) {
 	const page = await getPageTemplate()
@@ -14,7 +15,14 @@ export default async function Page({ params }: Props) {
 
 	if (!post) notFound()
 
-	return <Modules modules={page?.modules} page={page} post={post} />
+	return (
+	    <>
+		    {/* Inject Dynamic Schema Markup */}
+			<SchemaMarkup post={post} />
+	        <Modules modules={page?.modules} page={page} post={post} />
+			
+	    </> 
+	)
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -46,7 +54,7 @@ async function getPost(params: { slug?: string }) {
 			metadata {
 				...,
 				'ogimage': image.asset->url + '?w=1200'
-			}
+			},
 		}`,
 		params,
 	})

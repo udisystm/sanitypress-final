@@ -47,12 +47,12 @@ export default function PostContent({
 		<article {...moduleProps(props)}>
 			<header className="section space-y-6 text-center">
 				{post.featuredImage && (
-					<div className="relative h-[400px]">
+					<div className="relative h-[500px] overflow-hidden">
 						<Img
 							image={post.featuredImage}
-							className="absolute inset-0 h-full w-full object-cover"
+							className="h-full w-full object-cover"
 						/>
-						<div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-white text-center p-4">
+						<div className="absolute inset-0 bg-black/30 flex flex-col z-20 justify-center items-center text-white text-center p-4">
 							<h1 className="md:text-[72px] leading-normal text-[36px] font-bold">{post.metadata.title}</h1>
 							<div className="mt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
 								<Date value={post.publishDate as string} />

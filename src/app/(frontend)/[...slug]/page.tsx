@@ -40,7 +40,7 @@ async function getPage(params: { slug?: string[] }) {
 			modules[]{ ${modulesQuery} },
 			metadata {
 				...,
-				'ogimage': image.asset->url + '?w=1200'
+				'ogimage': image.asset->url + '?w=1200',
 			}
 		}`,
 		params: { slug: params.slug?.join('/') },

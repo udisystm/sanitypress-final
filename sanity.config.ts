@@ -13,6 +13,8 @@ import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel'
 import { visionTool } from '@sanity/vision'
 import { codeInput } from '@sanity/code-input'
 import { schemaTypes } from './src/sanity/schemas'
+import { schemaMarkup } from '@operationnation/sanity-plugin-schema-markup';
+
 
 const singletonTypes = ['site']
 export default defineConfig({
@@ -39,6 +41,7 @@ export default defineConfig({
 		}),
 		visionTool(),
 		codeInput(),
+		schemaMarkup(),
 	],
 
 	tasks: { enabled: false },

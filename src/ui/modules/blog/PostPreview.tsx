@@ -7,6 +7,7 @@ import Authors from './Authors'
 
 export default function PostPreview({ post }: { post: Sanity.BlogPost }) {
 	return (
+		<>
 		<Link
 			className="group flex h-full flex-col space-y-2"
 			href={processUrl(post, { base: false })}
@@ -49,5 +50,6 @@ export default function PostPreview({ post }: { post: Sanity.BlogPost }) {
 				/>
 			</div>
 		</Link>
+		</>
 	)
 }
