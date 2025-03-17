@@ -2,6 +2,7 @@ import { defineArrayMember, defineField, defineType } from 'sanity';
 import { VscEdit } from 'react-icons/vsc';
 import imageBlock from '../fragments/image-block';
 
+
 export default defineType({
 	name: 'blog.post',
 	title: 'Blog post',
@@ -130,6 +131,12 @@ export default defineType({
 			name: 'metadata',
 			type: 'metadata',
 			group: 'seo',
+		}),
+
+		defineField({
+			title: "Seo",
+			name: "seo",
+			type: "seoMetaFields",
 		}),
 	],
 	preview: {

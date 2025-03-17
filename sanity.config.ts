@@ -14,6 +14,8 @@ import { visionTool } from '@sanity/vision'
 import { codeInput } from '@sanity/code-input'
 import { schemaTypes } from './src/sanity/schemas'
 import { schemaMarkup } from '@operationnation/sanity-plugin-schema-markup';
+import { seoMetaFields } from "sanity-plugin-seo";
+
 
 
 const singletonTypes = ['site']
@@ -42,6 +44,7 @@ export default defineConfig({
 		visionTool(),
 		codeInput(),
 		schemaMarkup(),
+		seoMetaFields(),
 	],
 
 	tasks: { enabled: false },
