@@ -139,6 +139,7 @@ declare global {
 		}
 
 		type Metadata = {
+			seo: any
 			slug: { current: string }
 			title: string
 			description: string

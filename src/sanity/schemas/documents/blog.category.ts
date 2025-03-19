@@ -11,5 +11,10 @@ export default defineType({
 			name: 'title',
 			type: 'string',
 		}),
+		defineField({
+			title: "Seo",
+			name: "seo",
+			type: "seoMetaFields",
+		}),
 	],
 })

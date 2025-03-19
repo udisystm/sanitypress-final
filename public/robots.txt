@@ -4,6 +4,3 @@ Allow: /
 
 # Host
 Host: https://www.scalemarketer.com
-
-# Sitemaps
-Sitemap: https://www.scalemarketer.com/sitemap.xml

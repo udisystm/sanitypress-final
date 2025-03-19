@@ -5,6 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@media screen and (max-width: 766px) {
+	.sm-hidden{
+	  display: none;
+	}
+  }
+
 @layer base {
 	* {
 		min-width: 0;

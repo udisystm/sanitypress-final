@@ -47,7 +47,8 @@ export default function PostContent({
 		<article {...moduleProps(props)}>
 			<header className="section space-y-6 text-center">
 				{post.featuredImage && (
-					<div className="relative h-[500px] overflow-hidden">
+					<>
+					<div className="relative h-[500px] overflow-hidden sm-hidden md:hidden lg:flex">
 						<Img
 							image={post.featuredImage}
 							className="h-full w-full object-cover"
@@ -65,6 +66,28 @@ export default function PostContent({
 
 						</div>
 					</div>
+					<div className="lg:hidden px-4">
+					    <h1 className="md:text-[72px] leading-normal text-[36px] font-bold">{post.metadata.title}</h1>
+						<div className="py-8">
+						    <Categories
+						        className="flex justify-center flex-wrap gap-x-2"
+						        categories={post.categories}
+						    />
+						    <div className="flex gap-4 justify-center">
+						    	<div className="flex gap-4">
+						    	    <Date value={post.publishDate as string} />
+						    		<ReadTime value={Number(post.readTime)} />
+						    	</div>
+						    </div>
+						</div>
+						<div className="pt-2">
+						    <Img
+						    	image={post.featuredImage}
+						    	className="h-full w-full rounded-3xl"
+						    />
+						</div>
+					</div>
+					</>
 				)}
 				{/* <h1 className="h1 text-balance">{post.metadata.title}</h1> */}
 			</header>

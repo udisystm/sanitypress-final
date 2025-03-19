@@ -23,6 +23,11 @@ export default defineType({
 			type: 'array',
 			of: [{ type: 'link' }, { type: 'link.list' }],
 		}),
+		defineField({
+			title: "Seo",
+			name: "seo",
+			type: "seoMetaFields",
+		}),
 	],
 	preview: {
 		select: {
