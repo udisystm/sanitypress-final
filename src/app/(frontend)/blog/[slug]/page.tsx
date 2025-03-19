@@ -5,8 +5,6 @@ import { notFound } from 'next/navigation'
 import Modules from '@/ui/modules'
 import processMetadata from '@/lib/processMetadata'
 import SchemaMarkup from '@/ui/SchemaMarkup'
-import { NextSeo } from 'next-seo';
-
 
 export default async function Page({ params }: Props) {
 	const page = await getPageTemplate()
@@ -19,23 +17,6 @@ export default async function Page({ params }: Props) {
 
 	return (
 	    <>
-
-		{/* Inject Dynamic SEO */}
-		<NextSeo
-				title={post.metadata?.seo?.title || post.metadata?.title}
-				description={post.metadata?.seo?.description || ''}
-				openGraph={{
-					title: post.metadata?.seo?.title || post.metadata?.title,
-					description: post.metadata?.seo?.description || '',
-					url: `https://www.scalemarketer.com/blog/${post.metadata?.slug}`,
-					images: post.metadata?.seo?.image
-						? [{ url: post.metadata.seo.image }]
-						: post.metadata?.ogimage
-						? [{ url: post.metadata.ogimage }]
-						: [],
-				}}
-			/>
-		 
 		    {/* Inject Dynamic Schema Markup */}
 			<SchemaMarkup post={post} />
 	        <Modules modules={page?.modules} page={page} post={post} />
@@ -72,12 +53,7 @@ async function getPost(params: { slug?: string }) {
 			authors[]->,
 			metadata {
 				...,
-				'ogimage': image.asset->url + '?w=1200',
-				seo {
-					title,
-					description,
-					'image': image.asset->url
-				}
+				'ogimage': image.asset->url + '?w=1200'
 			},
 		}`,
 		params,
