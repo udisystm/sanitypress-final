@@ -139,6 +139,8 @@ declare global {
 		}
 
 		type Metadata = {
+			metaTitle: string // ✅ Add this
+			metaDescription: string // ✅ Add this
 			seo: any
 			slug: { current: string }
 			title: string
@@ -146,7 +148,24 @@ declare global {
 			image?: Image
 			ogimage?: string
 			noIndex: boolean
-		}
+			nofollowAttributes?: boolean
+			openGraph?: {
+			  title?: string
+			  description?: string
+			  url?: string
+			  siteName?: string
+			  image?: {
+				asset?: { url: string }
+			  }
+			}
+			twitter?: {
+			  cardType?: string
+			  creator?: string
+			  site?: string
+			  handle?: string
+			}
+		  }
+		  
 
 		type Module<T = string> = {
 			_type: T

@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import SkipToContent from '@/ui/SkipToContent';
 import Announcement from '@/ui/Announcement';
 import Header2 from '@/ui/modules/Header2';
@@ -10,20 +11,39 @@ import { groq } from 'next-sanity';
 import { sanityClient } from '../../sanity/lib/sanityClient';
 import Script from 'next/script';
 
-// Queries for header and footer data
+// Queries for SEO, header, and footer data
+const seoQuery = groq`*[_type == "siteSettings"][0]{ seo { metaTitle, metaDescription, canonicalUrl, openGraph, twitter } }`;
 const footerQuery = groq`*[_type == "footer"][0]`;
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  // Fetch footer data
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Fetch SEO and footer data from Sanity
+  const seoData = await sanityClient.fetch(seoQuery);
   const footerData = await sanityClient.fetch(footerQuery);
 
   return (
     <html lang="en">
       <head>
+        {/* Primary Meta Tags */}
+        <Head>
+          <title>{seoData?.seo?.metaTitle || 'Scale Marketer'}</title>
+          <meta name="description" content={seoData?.seo?.metaDescription || 'Default Description'} />
+          <link rel="canonical" href={seoData?.seo?.canonicalUrl || 'https://www.scalemarketer.com/'} />
+
+          {/* Open Graph / Facebook */}
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content={seoData?.seo?.openGraph?.url || 'https://www.scalemarketer.com/'} />
+          <meta property="og:title" content={seoData?.seo?.openGraph?.title || seoData?.seo?.metaTitle} />
+          <meta property="og:description" content={seoData?.seo?.openGraph?.description || seoData?.seo?.metaDescription} />
+          {seoData?.seo?.openGraph?.image?.asset?.url && (
+            <meta property="og:image" content={seoData.seo.openGraph.image.asset.url} />
+          )}
+
+          {/* Twitter */}
+          <meta name="twitter:card" content={seoData?.seo?.twitter?.cardType || 'Scale Marketer'} />
+          <meta name="twitter:site" content={seoData?.seo?.twitter?.site || '@scalemarketer'} />
+          <meta name="twitter:creator" content={seoData?.seo?.twitter?.creator || '@scalemarketer'} />
+        </Head>
+
         {/* Google Tag Manager Script for Head */}
         <Script
           id="google-tag-manager"
@@ -54,10 +74,7 @@ export default async function RootLayout({
         <main id="main-content" tabIndex={-1}>
           {children}
         </main>
-        <Footer2
-          services={footerData.services}
-          company={footerData.company}
-        />
+        <Footer2 services={footerData?.services} company={footerData?.company} />
         <VisualEditingControls />
         <Analytics />
         <SpeedInsights />
