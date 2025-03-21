@@ -2,6 +2,8 @@ import { client } from "@/sanity/client"; // Import your Sanity client
 import { groq } from "next-sanity";
 import { MetadataRoute } from "next";
 
+export const dynamic = "force-dynamic"; // Ensure this runs on every request
+
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://www.scalemarketer.com";
 
 // GROQ Query to fetch all pages and blog posts with correct slugs

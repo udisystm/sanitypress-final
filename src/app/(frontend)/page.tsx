@@ -2,10 +2,16 @@ import { groq, fetchSanity } from '@/sanity/lib/fetch'
 import { modulesQuery } from '@/sanity/lib/queries'
 import Modules from '@/ui/modules'
 import processMetadata from '@/lib/processMetadata'
+import SchemaMarkup from '@/ui/HomeSchemaMarkup'
 
 export default async function Page() {
 	const page = await getPage()
-	return <Modules modules={page?.modules} />
+	return ( 
+		<>
+		   <SchemaMarkup />
+	       <Modules modules={page?.modules} />
+	    </>
+	)
 }
 
 export async function generateMetadata() {

@@ -148,7 +148,7 @@ export default defineType({
 			media: 'featuredImage',
 		},
 		prepare: ({ title, publishDate, slug, media, featured }) => ({
-			title: [featured && '★', title].filter(Boolean).join(' '),
+			title: [featured && '', title].filter(Boolean).join(' '),
 			subtitle: [publishDate || 'No date', slug && `/${slug}`]
 				.filter(Boolean)
 				.join(' — '),
