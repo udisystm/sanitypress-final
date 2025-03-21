@@ -2,13 +2,13 @@ import { groq, fetchSanity } from '@/sanity/lib/fetch'
 import { modulesQuery } from '@/sanity/lib/queries'
 import Modules from '@/ui/modules'
 import processMetadata from '@/lib/processMetadata'
-import SchemaMarkup from '@/ui/HomeSchemaMarkup'
+import HomePageSchemaMarkup from '@/ui/HomeSchemaMarkUp'
 
 export default async function Page() {
 	const page = await getPage()
 	return ( 
 		<>
-		   <SchemaMarkup />
+		   <HomePageSchemaMarkup />
 	       <Modules modules={page?.modules} />
 	    </>
 	)

@@ -3,7 +3,7 @@ import { NextSchemaScript, type Schema } from '@operationnation/sanity-plugin-sc
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
 
-const SchemaMarkup = () => {
+const HomePageSchemaMarkup = () => {
   const schema: Schema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -48,4 +48,4 @@ const SchemaMarkup = () => {
   return <NextSchemaScript schema={[schema]} projectId={projectId} dataset={dataset} />;
 };
 
-export default SchemaMarkup;
+export default HomePageSchemaMarkup;
