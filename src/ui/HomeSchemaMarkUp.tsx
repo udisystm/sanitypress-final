@@ -11,8 +11,8 @@ const HomePageSchemaMarkup = () => {
     "@id": "https://www.scalemarketer.com/#webpage",
     "url": "https://www.scalemarketer.com/",
     "name": "Growth Marketing Consultant | Performance Marketing | Scale Marketer",
-    "datePublished": new Date("2022-09-08T11:02:17+00:00"), // ✅ Fixed Date type
-    "dateModified": new Date("2022-09-13T00:50:14+00:00"), // ✅ Fixed Date type
+    "datePublished": new Date("2022-09-08T11:02:17+00:00"),
+    "dateModified": new Date("2022-09-13T00:50:14+00:00"),
     "description": "Strategic growth marketing and performance marketing consulting to scale your business with proven ROI-focused digital strategies by Madhukar.",
     "inLanguage": "en-US",
     "isPartOf": {
