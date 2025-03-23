@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react'
 import Img from '../Img'
 import { sanityClient } from '@/sanity/lib/sanityClient'
+import { FaLinkedin } from 'react-icons/fa6'
+import Link from 'next/link'
 
 interface NavItem {
 	_key: string
@@ -139,6 +141,9 @@ useEffect(() => {
 							<h3 className="mb-4 font-sans font-medium text-gray-900">
 								Company
 							</h3>
+							<Link href="https://www.linkedin.com/in/madhukarsv" target="_blank" rel="noopener noreferrer">
+							    <FaLinkedin className='h-6 w-6' />
+							</Link>
 							<ul className="space-y-2">
 								{company?.map((item) => (
 									<li key={item._key}>
